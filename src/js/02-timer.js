@@ -22,16 +22,14 @@ flatpickr(options, {
     }
   }
 })
-
-
-function addLeadingZero(options) {
-   return String(options).padStart(2, '0');
-}
 let endDate = new Date();
-const remainingTime = convertMs(endDate);
+let remainingTime = convertMs(endDate);
 
+function addLeadingZero(endDate) {
+  return String(endDate).padStart(2, '0');
+}
 function convertMs(endDate) {
-  const remainingTime = endDate - Date.now();
+  let remainingTime = endDate - Date.now();
   const days = Math.floor(remainingTime / (1000 * 60 * 60 * 24));
   const hours = Math.floor((remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
   const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
@@ -40,7 +38,8 @@ function convertMs(endDate) {
   return { days, hours, minutes, seconds };
 }
 
-const daysEl = document.querySelector('span[data-days]');
+
+  const daysEl = document.querySelector('span[data-days]');
 daysEl.textContent = addLeadingZero(remainingTime.days);
 
 const hoursEl = document.querySelector('span[data-hours]');
@@ -53,7 +52,11 @@ const secondsEl = document.querySelector('span[data-seconds]');
 secondsEl.textContent = addLeadingZero(remainingTime.seconds);
 
 
-startButton.addEventListener('submit', () => {
+
+
+
+
+startButton.addEventListener('click', () => {
     convertMs();
     const timerInterval = setInterval(convertMs, 1000);
   })
