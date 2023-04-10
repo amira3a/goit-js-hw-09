@@ -1,3 +1,5 @@
+import Notiflix from "notiflix";
+
 const form = document.querySelector('.form');
 
 form.addEventListener('submit', (event) => {
@@ -9,8 +11,8 @@ form.addEventListener('submit', (event) => {
   
   for(let i = 1; i <= amount; i++) {
     createPromise(i, delay + (i - 1) * step)
-      .then((result) => console.log(`Promise ${result.position} resolved after ${result.delay}ms`))
-      .catch((error) => console.error(`Promise ${error.position} rejected after ${error.delay}ms`));
+      .then((result) => Notiflix.Notify.success(`Promise ${result.position} resolved after ${result.delay}ms`))
+      .catch((error) => Notiflix.Notify.warning(`Promise ${error.position} rejected after ${error.delay}ms`));
   }
 });
 
